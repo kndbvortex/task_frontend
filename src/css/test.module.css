@@ -1,0 +1,18 @@
+.test {
+  color: aqua;
+  font-size: medium;
+}
+.grand_bloc {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+#grand_bloc {
+  color: blueviolet;
+}
+
+.grand_bloc,
+.test {
+  margin: 20px;
+}

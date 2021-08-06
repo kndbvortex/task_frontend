@@ -1,0 +1,15 @@
+.test {
+  color: aqua;
+  font-size: medium;
+}
+.grand_bloc {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.grand_bloc,
+.test {
+  margin: 20px;
+}
