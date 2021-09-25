@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import "./css/bootstrap.min.css";
 import Tasks from "./components/Tasks";
+import { AddTask } from "./components/AddTask";
 import React, { useState } from "react";
 
 function App() {
@@ -30,6 +31,11 @@ function App() {
       reminder: true,
     },
   ]);
+
+  const add_task = (task) => {
+    setTasks ([...tasks, {...task, id:tasks.length + 1}])
+  }
+
   const delete_task = (id) => {
     setTasks(
       tasks.filter((tasks) => {
@@ -37,10 +43,19 @@ function App() {
       })
     );
   };
+  const onToggle = (id)=>{
+    setTasks( tasks.map((task) => {
+      if (task.id !== id)
+        return task
+      else
+        return { ...task, reminder: !task.reminder };
+    }))
+  }
   return (
     <div className="App">
       <Header />
-      <Tasks tasks={tasks} Delete={delete_task} />
+      <AddTask addTask={add_task}/>
+      <Tasks toggle={onToggle} tasks={tasks} Delete={delete_task} />
     </div>
   );
 }

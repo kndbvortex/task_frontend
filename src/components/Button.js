@@ -7,6 +7,7 @@ export class Button extends Component {
     this.style = {
       width: props.width,
       height: props.heigh,
+      ...this.props.style,
     };
   }
   render() {
@@ -15,6 +16,8 @@ export class Button extends Component {
         style={this.style}
         onClick={this.props.onclick}
         className={this.state.classbn}
+        data-bs-toggle="modal"
+        data-bs-target="#addTask"
       >
         Add
       </button>
