@@ -4,7 +4,6 @@ import Button from "./Button";
 
 const Header = () => {
   const click = () => {
-    console.log("Le boutton a été cliqué");
   };
   return (
     <header className="mt-1 container d-flex justify-content-between justify-content-md-around">

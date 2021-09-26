@@ -1,41 +1,35 @@
 import React, { useState } from "react";
 import add_task_css from "../css/task.module.css";
-import hide_modal from "./utils";
+import hide_modal from "./utils"
 
 const style = {
   height: "50px",
   fontSize: "1em",
 };
-export const AddTask = ({ addTask }) => {
-  const [task_name, set_task_name] = useState("Conception d'un SI");
-  const [day, set_day] = useState("10-12-2022");
-  const [reminder, set_reminder] = useState(false);
+export const UpdateTask = ({ update_task, task, id }) => {
+  const [task_name, set_task_name] = useState(task.text);
+  const [day, set_day] = useState(task.day);
+  const [reminder, set_reminder] = useState(task.reminder);
 
   const on_submit = (e) => {
     e.preventDefault();
-    if (task_name === "") {
-      var input = document.getElementById("error_task_name");
-      input.classList.remove("d-none");
-    } else {
- 
-      addTask({
-        text: task_name,
-        day: day,
-        reminder: reminder,
-      });
-      set_day("");
-      set_reminder("");
-      set_task_name("");
-      hide_modal("addTask");
+    var data = {
+        id: task.id,
+        text:task_name,
+        day:day,
+        reminder: reminder
     }
+    update_task(data);
+    hide_modal("updateTask" + task.id);
+
   };
 
   return (
     <section
       className="modal"
-      id="addTask"
+      id={"updateTask" + id}
       tabIndex="-1"
-      aria-labelledby="addTask"
+      aria-labelledby="updateTask"
       aria-hidden="true"
     >
       <div
@@ -45,7 +39,7 @@ export const AddTask = ({ addTask }) => {
       >
         <div className="modal-content">
           <div className="modal-header d-flex justify-content-center">
-            <h2 className="modal-title">Add a task</h2>
+            <h2 className="modal-title">Update Task</h2>
           </div>
           <div className="modal-body">
             <form
@@ -53,14 +47,13 @@ export const AddTask = ({ addTask }) => {
               id="form-create-task"
             >
               <div className="form-group col-12 col-lg-8">
-                <label htmlFor="name">Taks Name</label>
+                <label htmlFor="updated_name">Taks Name</label>
                 <input
                   style={style}
                   type="text"
                   className="form-control"
                   id="taskName"
-                  name="name"
-                  aria-describedby="emailHelp"
+                  name="updated_name"
                   placeholder="Enter de name of the task"
                   value={task_name}
                   onChange={(e) => set_task_name(e.target.value)}
@@ -73,13 +66,13 @@ export const AddTask = ({ addTask }) => {
                 </div>
               </div>
               <div className="form-group col-12 col-lg-8">
-                <label htmlFor="date">Date and time</label>
+                <label htmlFor="updated_date">Date and time</label>
                 <input
                   style={style}
                   type="text"
                   className="form-control"
                   id="date"
-                  name="date"
+                  name="updated_date"
                   placeholder="DD-MM-YYYY"
                   value={day}
                   onChange={(e) => set_day(e.target.value)}
@@ -92,6 +85,7 @@ export const AddTask = ({ addTask }) => {
                   id="exampleCheck1"
                   value={reminder}
                   onChange={(e) => set_reminder(e.currentTarget.checked)}
+                  checked={reminder}
                 />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   Reminder
@@ -111,7 +105,7 @@ export const AddTask = ({ addTask }) => {
                 className="col-3"
                 onClick={on_submit}
               >
-                Create
+                Update
               </button>
             </form>
           </div>
