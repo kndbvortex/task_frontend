@@ -7,6 +7,10 @@ var hide_modal = (id) => {
   for (let i = 0; i < modalsBackdrops.length; i++) {
     document.body.removeChild(modalsBackdrops[i]);
   }
+  document.body.classList.remove("modal-open")
+  document.body.setAttribute("cz-shortcut-listen" ,"true");
+  document.body.style = ""
+
 };
 
 export default hide_modal;

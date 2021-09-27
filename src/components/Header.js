@@ -19,11 +19,9 @@ const Header = () => {
           fontSize: "1em",
           width: "100px",
           borderRadius: "5%",
-          backgroundColor: "#FFCC00",
           color: "black",
-          fontWeight: "bold",
         }}
-        className="align-self-end"
+        className="align-self-end bg-warning"
         onclick={click}
       />
     </header>

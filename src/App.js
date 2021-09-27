@@ -7,13 +7,6 @@ import React, { useState, useEffect } from "react";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const get_all_tasks = () => {
-    fetch("http://127.0.0.1:8000/tasks/")
-      .then((response) => response.json())
-      .then((response) => {setTasks(response)})
-      .catch((error) => alert("Erreur : " + error));
-  }
-
   const update_task = (task) => {
     fetch(`http://127.0.0.1:8000/tasks/${task.id}/`, {
       headers: {
@@ -49,7 +42,7 @@ function App() {
         return response.json();
       })
       .then((response) => {
-        setTasks([response,...tasks]);
+        setTasks([...tasks, response]);
       })
       .catch((error) => alert("Erreur : " + error));
   };
@@ -84,7 +77,12 @@ function App() {
   }
 
   useEffect(() => {
-    get_all_tasks()
+    fetch("http://127.0.0.1:8000/tasks/")
+      .then((response) => response.json())
+      .then((response) => {
+        setTasks(response);
+      })
+      .catch((error) => alert("Erreur : " + error));
   }, []);
 
   return (
@@ -94,7 +92,7 @@ function App() {
         className="container mt-4 d-flex flex-raw justify-content-center"
         id="form-create-task"
       >
-        <div className="form-group col-8 m-0 d-flex flex-raw justify-content-center">
+        <div className="form-group col-10 col-md-8 m-0 d-flex flex-raw justify-content-center">
           <input
             type="text"
             className="form-control"
@@ -112,7 +110,7 @@ function App() {
               fontSize: "0.8em",
             }}
             type="submit"
-            className="btn col-2 bg-primary"
+            className="btn col-3 col-md-2 bg-primary"
             onClick = {(e) => {e.preventDefault(); search()}}
           >
             Search

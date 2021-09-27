@@ -10,7 +10,8 @@ const Task = ({ task, Delete, update_task }) => {
       key={task.id}
       className={`d-flex flex-row justify-content-between card m-2 p-3 bg-light ${
         task.reminder ? taskcss.reminder : ""
-      }`}
+      }` 
+    }
     >
       <div>
         <span>{task.text}</span> <br />
